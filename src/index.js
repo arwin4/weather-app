@@ -34,7 +34,7 @@ async function getWeatherData(query = 'Arnhem') {
     tempC: fullWeatherData.current.temp_c,
     tempF: fullWeatherData.current.temp_f,
 
-    daySummary: fullWeatherData.forecast.forecastday[0].day.condition.text,
+    dayForecast: fullWeatherData.forecast.forecastday[0].day.condition.text,
   };
 
   // TODO: objects for forecasts of current day + 1 and current day + 2
@@ -46,6 +46,8 @@ async function getWeatherData(query = 'Arnhem') {
 
     daylightDuration: getDaylightDuration(),
   };
+
+  console.log(currentWeather);
 }
 
 getWeatherData();
