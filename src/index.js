@@ -31,6 +31,7 @@ async function getWeatherData(query = 'Arnhem') {
     city: fullWeatherData.location.name,
     country: fullWeatherData.location.country,
 
+    icon: fullWeatherData.current.condition.icon,
     description: fullWeatherData.current.condition.text,
     tempC: fullWeatherData.current.temp_c,
     tempF: fullWeatherData.current.temp_f,
@@ -77,8 +78,6 @@ async function getWeatherData(query = 'Arnhem') {
 
   const forecastDay1 = getDailyForecast(1);
   const forecastDay2 = getDailyForecast(2);
-
-  // TODO: objects for forecasts of current day + 1 and current day + 2
 
   const sunTimes = {
     // TODO: regional hour format
