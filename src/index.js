@@ -76,9 +76,6 @@ async function getWeatherData(query = 'Arnhem') {
     return forecast;
   }
 
-  const forecastDay1 = getDailyForecast(1);
-  const forecastDay2 = getDailyForecast(2);
-
   const sunTimes = {
     // TODO: regional hour format
     sunrise: fullWeatherData.forecast.forecastday[0].astro.sunrise,
@@ -87,8 +84,20 @@ async function getWeatherData(query = 'Arnhem') {
     daylightDuration: getDaylightDuration(),
   };
 
-  console.log(currentWeather);
-  console.log(forecastDay2);
+  const forecastDay1 = getDailyForecast(1);
+  const forecastDay2 = getDailyForecast(2);
+
+  return {
+    currentWeather,
+    sunTimes,
+    forecastDay1,
+    forecastDay2,
+  };
 }
 
-getWeatherData();
+(async () => {
+  console.log((await getWeatherData()).currentWeather);
+  console.log((await getWeatherData()).sunTimes);
+  console.log((await getWeatherData()).forecastDay1);
+  console.log((await getWeatherData()).forecastDay2);
+})();
