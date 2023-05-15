@@ -3,6 +3,7 @@ import './style.css';
 import { formatDuration } from 'date-fns';
 import differenceInMinutes from 'date-fns/differenceInMinutes';
 import parse from 'date-fns/parse';
+import getDay from 'date-fns/getDay';
 
 async function getWeatherData(query = 'Arnhem') {
   // Get weather/astronomical data for three days (includes current day)
@@ -37,6 +38,46 @@ async function getWeatherData(query = 'Arnhem') {
     dayForecast: fullWeatherData.forecast.forecastday[0].day.condition.text,
   };
 
+  function getWeekdayName(dateString) {
+    // Get a date's weekday name in English.
+    // dateString must be formatted as '2023-05-15', which returns 'Monday'.
+
+    const date = parse(dateString, 'yyyy-MM-dd', new Date());
+    const dayNumber = getDay(date);
+
+    return {
+      1: 'Monday',
+      2: 'Tuesday',
+      3: 'Wednesday',
+      4: 'Thursday',
+      5: 'Friday',
+      6: 'Saturday',
+      7: 'Sunday',
+    }[dayNumber];
+  }
+
+  function getDailyForecast(dayNumber) {
+    const fullDayData = fullWeatherData.forecast.forecastday[dayNumber].day;
+    const forecast = {
+      minTempC: fullDayData.mintemp_c,
+      maxTempC: fullDayData.maxtemp_c,
+      minTempF: fullDayData.mintemp_f,
+      maxTempF: fullDayData.maxtemp_f,
+
+      text: fullDayData.condition.text,
+      icon: fullDayData.condition.icon,
+    };
+
+    // Save weekday name
+    const dateString = fullWeatherData.forecast.forecastday[dayNumber].date;
+    forecast.weekday = getWeekdayName(dateString);
+
+    return forecast;
+  }
+
+  const forecastDay1 = getDailyForecast(1);
+  const forecastDay2 = getDailyForecast(2);
+
   // TODO: objects for forecasts of current day + 1 and current day + 2
 
   const sunTimes = {
@@ -48,6 +89,7 @@ async function getWeatherData(query = 'Arnhem') {
   };
 
   console.log(currentWeather);
+  console.log(forecastDay2);
 }
 
 getWeatherData();
