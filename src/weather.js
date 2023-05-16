@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 import { formatDuration } from 'date-fns';
 import differenceInMinutes from 'date-fns/differenceInMinutes';
 import parse from 'date-fns/parse';
@@ -97,9 +98,13 @@ const getWeather = async (query = 'Arnhem') => {
   let fullWeatherData;
   try {
     fullWeatherData = await weatherDataJSON.json();
-    console.log('got json');
+    if (fullWeatherData.error) {
+      throw new Error(
+        `Something went wrong getting data from the API. Server responded with: ${fullWeatherData.error.code}: ${fullWeatherData.error.message}`,
+      );
+    }
   } catch (error) {
-    console.log('couldnt get weather from api', error);
+    alert(error);
   }
 
   return convertWeatherData(fullWeatherData);
