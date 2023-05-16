@@ -92,15 +92,23 @@ function convertWeatherData(allWeather) {
 
 const getWeather = async (query = 'Arnhem') => {
   // Get weather/astronomical data for three days (includes current day)
-  const url = `https://api.weatherapi.com/v1/forecast.json?key=%20b80d13c73b394cdaa92140628231405&q=${query}&days=3&aqi=no&alerts=no`;
-  const weatherDataJSON = await fetch(url, { mode: 'cors' });
+  const url = `https://api.weatherapi.com/v1/forecast.json?key=%20b80d13c73b394cdaa9214062823140&q=${query}&days=3&aqi=no&alerts=no`;
+
+  let weatherDataJSON;
+  try {
+    weatherDataJSON = await fetch(url, { mode: 'cors' });
+  } catch (error) {
+    alert(error);
+  }
 
   let fullWeatherData;
   try {
     fullWeatherData = await weatherDataJSON.json();
     if (fullWeatherData.error) {
       throw new Error(
-        `Something went wrong getting data from the API. Server responded with: ${fullWeatherData.error.code}: ${fullWeatherData.error.message}`,
+        `something went wrong getting data from the API. Server responded with:
+
+${fullWeatherData.error.code}: ${fullWeatherData.error.message}`,
       );
     }
   } catch (error) {
