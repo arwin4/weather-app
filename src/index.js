@@ -6,15 +6,28 @@ import parse from 'date-fns/parse';
 import getDay from 'date-fns/getDay';
 
 async function getWeatherData(query = 'Arnhem') {
-  // Get weather/astronomical data for three days (includes current day)
-  const url = `https://api.weatherapi.com/v1/forecast.json?key=%20b80d13c73b394cdaa92140628231405&q=${query}&days=3&aqi=no&alerts=no`;
-  const weatherDataJSON = await fetch(url, { mode: 'cors' });
-  const fullWeatherData = await weatherDataJSON.json();
+  // eslint-disable-next-line wrap-iife
+  async function getJSON() {
+    // Get weather/astronomical data for three days (includes current day)
+    const url = `https://api.weatherapi.com/v1/forecast.json?key=%20b80d13c73b394cdaa92140628231405&q=${query}&days=3&aqi=no&alerts=no`;
+    const weatherDataJSON = await fetch(url, { mode: 'cors' });
+
+    let fullWeatherData;
+    try {
+      fullWeatherData = await weatherDataJSON.json();
+      console.log('got json');
+    } catch (error) {
+      console.log('couldnt get weather from api', error);
+    }
+    return fullWeatherData;
+  }
+
+  const allWeather = await getJSON();
 
   function getDaylightDuration() {
     // Returns the current day's length, formatted as '8 hours and 25 minutes'
-    const { sunrise } = fullWeatherData.forecast.forecastday[0].astro;
-    const { sunset } = fullWeatherData.forecast.forecastday[0].astro;
+    const { sunrise } = allWeather.forecast.forecastday[0].astro;
+    const { sunset } = allWeather.forecast.forecastday[0].astro;
 
     // Convert times ('05:48 AM') to Date in order to use differenceInMinutes
     const sunriseDate = parse(sunrise, 'hh:mm a', new Date());
@@ -28,15 +41,15 @@ async function getWeatherData(query = 'Arnhem') {
   }
 
   const currentWeather = {
-    city: fullWeatherData.location.name,
-    country: fullWeatherData.location.country,
+    city: allWeather.location.name,
+    country: allWeather.location.country,
 
-    icon: fullWeatherData.current.condition.icon,
-    description: fullWeatherData.current.condition.text,
-    tempC: fullWeatherData.current.temp_c,
-    tempF: fullWeatherData.current.temp_f,
+    icon: allWeather.current.condition.icon,
+    description: allWeather.current.condition.text,
+    tempC: allWeather.current.temp_c,
+    tempF: allWeather.current.temp_f,
 
-    dayForecast: fullWeatherData.forecast.forecastday[0].day.condition.text,
+    dayForecast: allWeather.forecast.forecastday[0].day.condition.text,
   };
 
   function getWeekdayName(dateString) {
@@ -58,7 +71,7 @@ async function getWeatherData(query = 'Arnhem') {
   }
 
   function getDailyForecast(dayNumber) {
-    const fullDayData = fullWeatherData.forecast.forecastday[dayNumber].day;
+    const fullDayData = allWeather.forecast.forecastday[dayNumber].day;
     const forecast = {
       minTempC: fullDayData.mintemp_c,
       maxTempC: fullDayData.maxtemp_c,
@@ -70,7 +83,7 @@ async function getWeatherData(query = 'Arnhem') {
     };
 
     // Save weekday name
-    const dateString = fullWeatherData.forecast.forecastday[dayNumber].date;
+    const dateString = allWeather.forecast.forecastday[dayNumber].date;
     forecast.weekday = getWeekdayName(dateString);
 
     return forecast;
@@ -78,8 +91,8 @@ async function getWeatherData(query = 'Arnhem') {
 
   const sunTimes = {
     // TODO: regional hour format
-    sunrise: fullWeatherData.forecast.forecastday[0].astro.sunrise,
-    sunset: fullWeatherData.forecast.forecastday[0].astro.sunset,
+    sunrise: allWeather.forecast.forecastday[0].astro.sunrise,
+    sunset: allWeather.forecast.forecastday[0].astro.sunset,
 
     daylightDuration: getDaylightDuration(),
   };
@@ -96,8 +109,6 @@ async function getWeatherData(query = 'Arnhem') {
 }
 
 (async () => {
-  console.log((await getWeatherData()).currentWeather);
-  console.log((await getWeatherData()).sunTimes);
-  console.log((await getWeatherData()).forecastDay1);
-  console.log((await getWeatherData()).forecastDay2);
+  const weatherData = await getWeatherData();
+  console.log(weatherData);
 })();
