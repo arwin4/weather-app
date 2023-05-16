@@ -92,7 +92,7 @@ function convertWeatherData(allWeather) {
 
 const getWeather = async (query = 'Arnhem') => {
   // Get weather/astronomical data for three days (includes current day)
-  const url = `https://api.weatherapi.com/v1/forecast.json?key=%20b80d13c73b394cdaa9214062823140&q=${query}&days=3&aqi=no&alerts=no`;
+  const url = `https://api.weatherapi.com/v1/forecast.json?key=%20b80d13c73b394cdaa92140628231405&q=${query}&days=3&aqi=no&alerts=no`;
 
   let weatherDataJSON;
   try {
