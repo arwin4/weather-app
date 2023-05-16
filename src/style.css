@@ -63,6 +63,11 @@ body {
 
 .icon {
   grid-area: icon;
+  display: grid;
+}
+
+.current-weather-icon {
+  place-self: center;
 }
 
 .temp {
