@@ -1,0 +1,103 @@
+* {
+  border: 1px solid black;
+}
+
+body {
+  margin: 0;
+}
+
+.container {
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    '. search .'
+    'sunrise weather sunset'
+    'sunrise weather sunset';
+}
+
+.search {
+  justify-self: center;
+  align-self: center;
+  grid-area: search;
+}
+
+.search-bar {
+  height: 30px;
+
+  font-size: 2rem;
+  caret-color: #7b8898;
+
+  border-radius: 42px;
+  border-style: none;
+}
+
+.weather {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    'current tomorrow'
+    'current day-after-tomorrow';
+  grid-area: weather;
+}
+
+.current {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 50% 1fr 1fr 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    'icon'
+    'temp'
+    'description'
+    'forecast';
+  grid-area: current;
+}
+
+.icon {
+  grid-area: icon;
+}
+
+.temp {
+  grid-area: temp;
+}
+
+.description {
+  grid-area: description;
+}
+
+.forecast {
+  grid-area: forecast;
+}
+
+.tomorrow {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    '. . .'
+    '. . .'
+    '. . .';
+  grid-area: tomorrow;
+}
+
+.day-after-tomorrow {
+  grid-area: day-after-tomorrow;
+}
+
+.sunrise {
+  grid-area: sunrise;
+}
+
+.sunset {
+  grid-area: sunset;
+}
