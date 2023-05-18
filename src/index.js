@@ -1,3 +1,4 @@
+import { doc } from 'prettier';
 import './style.css';
 
 import getWeather from './weather';
@@ -9,14 +10,22 @@ async function saveWeather(location) {
   console.log(weather);
 }
 
-function renderTemp(currentDiv, unit = 'C') {
-  const tempDisplay = currentDiv.querySelector('.temp');
-  if (unit === 'C') {
-    tempDisplay.textContent = weather.currentWeather.tempC;
-  } else {
-    // Fahrenheit
-    tempDisplay.textContent = weather.currentWeather.tempF;
-  }
+function renderTemp(unit = 'C') {
+  const todayTempElem = document.querySelector('.current .temp');
+  const tomorrowMinTempElem = document.querySelector('.tomorrow .min-temp');
+  const tomorrowMaxTempElem = document.querySelector('.tomorrow .max-temp');
+  const dayAfterTomorrowMinTempElem = document.querySelector(
+    '.day-after-tomorrow .min-temp',
+  );
+  const dayAfterTomorrowMaxTempElem = document.querySelector(
+    '.day-after-tomorrow .max-temp',
+  );
+
+  todayTempElem.textContent = weather.currentWeather[`temp${unit}`];
+  tomorrowMinTempElem.textContent = weather.day1[`minTemp${unit}`];
+  tomorrowMaxTempElem.textContent = weather.day1[`maxTemp${unit}`];
+  dayAfterTomorrowMinTempElem.textContent = weather.day2[`minTemp${unit}`];
+  dayAfterTomorrowMaxTempElem.textContent = weather.day2[`maxTemp${unit}`];
 }
 
 async function renderWeather(location) {
@@ -26,7 +35,7 @@ async function renderWeather(location) {
   const iconDisplay = currentDayDiv.querySelector('.current-weather-icon');
   // TODO: Bigger image? (124x124)
   iconDisplay.src = `https:${weather.currentWeather.icon}`;
-  renderTemp(currentDayDiv);
+  renderTemp();
 }
 
 function newLocation() {

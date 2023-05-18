@@ -61,7 +61,7 @@ body {
   grid-area: current;
 }
 
-.icon {
+.current .icon {
   grid-area: icon;
   display: grid;
 }
@@ -82,17 +82,29 @@ body {
   grid-area: forecast;
 }
 
-.tomorrow {
+.tomorrow,
+.day-after-tomorrow {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
   gap: 0px 0px;
   grid-auto-flow: row;
-  grid-template-areas:
-    '. . .'
-    '. . .'
-    '. . .';
-  grid-area: tomorrow;
+}
+
+.tomorrow .icon,
+.day-after-tomorrow .icon {
+  place-self: center;
+  grid-column: 1 / span 2;
+  grid-row: 1 / span 1;
+
+  background-color: black;
+}
+
+.tomorrow .min-temp,
+.tomorrow .max-temp,
+.day-after-tomorrow .min-temp,
+.day-after-tomorrow .max-temp {
+  place-self: center;
 }
 
 .day-after-tomorrow {

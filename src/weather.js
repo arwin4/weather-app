@@ -79,14 +79,14 @@ function convertWeatherData(allWeather) {
     daylightDuration: getDaylightDuration(),
   };
 
-  const forecastDay1 = getDailyForecast(1);
-  const forecastDay2 = getDailyForecast(2);
+  const day1 = getDailyForecast(1);
+  const day2 = getDailyForecast(2);
 
   return {
     currentWeather,
     sunTimes,
-    forecastDay1,
-    forecastDay2,
+    day1,
+    day2,
   };
 }
 
