@@ -1,4 +1,3 @@
-import { doc } from 'prettier';
 import './style.css';
 
 import getWeather from './weather';
@@ -11,6 +10,7 @@ async function saveWeather(location) {
 }
 
 function renderTemp(unit = 'C') {
+  // Display several temps, in Celcius by default but can also take 'F'
   const todayTempElem = document.querySelector('.current .temp');
   const tomorrowMinTempElem = document.querySelector('.tomorrow .min-temp');
   const tomorrowMaxTempElem = document.querySelector('.tomorrow .max-temp');
@@ -50,5 +50,24 @@ function newLocation() {
   });
 }
 
+function changeUnit() {
+  let currentUnit = 'C';
+  const unitBtn = document.querySelector('.temp-unit');
+  unitBtn.textContent = 'Change to °F';
+
+  unitBtn.addEventListener('click', () => {
+    if (currentUnit === 'C') {
+      renderTemp('F');
+      unitBtn.textContent = 'Change to °C';
+      currentUnit = 'F';
+    } else if (currentUnit === 'F') {
+      renderTemp('C');
+      unitBtn.textContent = 'Change to °F';
+      currentUnit = 'C';
+    }
+  });
+}
+
 renderWeather('Longyearbyen');
 newLocation();
+changeUnit();
