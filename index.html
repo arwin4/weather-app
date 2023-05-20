@@ -10,23 +10,37 @@
         <form action="" class="search-form">
           <input type="text" class="search-bar" autofocus />
         </form>
+        <div class="location-name"></div>
       </div>
       <div class="weather">
         <div class="current">
+          <div class="day-name">Right now</div>
           <div class="icon">
             <img class="current-weather-icon" alt="" />
           </div>
           <div class="temp"></div>
-          <div class="description"></div>
-          <div class="forecast"></div>
+          <div class="description-container">
+            <div class="title">Current condition</div>
+            <div class="description"></div>
+          </div>
+          <div class="today-forecast-container">
+            <div class="title">Rest of the day</div>
+            <div class="today-forecast"></div>
+          </div>
         </div>
         <div class="tomorrow">
-          <div class="icon">e</div>
+          <div class="day-name">Tomorrow</div>
+          <div class="icon">
+            <img alt="" class="tomorrow-icon" />
+          </div>
           <div class="min-temp">e</div>
           <div class="max-temp">e</div>
         </div>
         <div class="day-after-tomorrow">
-          <div class="icon">e</div>
+          <div class="day-name"></div>
+          <div class="icon">
+            <img alt="" class="day-after-tomorrow-icon" />
+          </div>
           <div class="min-temp">e</div>
           <div class="max-temp">e</div>
         </div>

@@ -20,9 +20,12 @@ body {
 }
 
 .search {
-  justify-self: center;
-  align-self: center;
   grid-area: search;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  row-gap: 20px;
 }
 
 .search-bar {
@@ -45,6 +48,10 @@ body {
     'current tomorrow'
     'current day-after-tomorrow';
   grid-area: weather;
+}
+
+.day-name {
+  position: absolute;
 }
 
 .current {
@@ -96,8 +103,6 @@ body {
   place-self: center;
   grid-column: 1 / span 2;
   grid-row: 1 / span 1;
-
-  background-color: black;
 }
 
 .tomorrow .min-temp,

@@ -30,12 +30,36 @@ function renderTemp(unit = 'C') {
 
 async function renderWeather(location) {
   await saveWeather(location);
+
+  // Location name
+  const locationName = document.querySelector('.location-name');
+  locationName.textContent = weather.currentWeather.city;
+
   // Current weather
-  const currentDayDiv = document.querySelector('.current');
-  const iconDisplay = currentDayDiv.querySelector('.current-weather-icon');
+  const todayIcon = document.querySelector('.current-weather-icon');
   // TODO: Bigger image? (124x124)
-  iconDisplay.src = `https:${weather.currentWeather.icon}`;
-  renderTemp();
+  todayIcon.src = `https:${weather.currentWeather.icon}`;
+
+  const todayDescription = document.querySelector('.description');
+  todayDescription.textContent = weather.currentWeather.description;
+
+  const todayForecast = document.querySelector('.today-forecast');
+  todayForecast.textContent = weather.currentWeather.dayForecast;
+
+  // Forecast tomorrow
+  const tomorrowIcon = document.querySelector('.tomorrow-icon');
+  tomorrowIcon.src = `https:${weather.day1.icon}`;
+
+  // Forecast day after tomorrow
+  const weekday = document.querySelector('.day-after-tomorrow .day-name');
+  weekday.textContent = weather.day2.weekday;
+
+  const dayAfterTomorrowIcon = document.querySelector(
+    '.day-after-tomorrow-icon',
+  );
+  dayAfterTomorrowIcon.src = `https:${weather.day2.icon}`;
+
+  renderTemp(); // Render all temps
 }
 
 function newLocation() {
