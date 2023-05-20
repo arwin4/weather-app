@@ -28,8 +28,8 @@ function convertWeatherData(allWeather) {
 
     icon: allWeather.current.condition.icon,
     description: allWeather.current.condition.text,
-    tempC: allWeather.current.temp_c,
-    tempF: allWeather.current.temp_f,
+    tempC: Math.round(allWeather.current.temp_c),
+    tempF: Math.round(allWeather.current.temp_f),
 
     dayForecast: allWeather.forecast.forecastday[0].day.condition.text,
   };
@@ -55,10 +55,10 @@ function convertWeatherData(allWeather) {
   function getDailyForecast(dayNumber) {
     const fullDayData = allWeather.forecast.forecastday[dayNumber].day;
     const forecast = {
-      minTempC: fullDayData.mintemp_c,
-      maxTempC: fullDayData.maxtemp_c,
-      minTempF: fullDayData.mintemp_f,
-      maxTempF: fullDayData.maxtemp_f,
+      minTempC: Math.round(fullDayData.mintemp_c),
+      maxTempC: Math.round(fullDayData.maxtemp_c),
+      minTempF: Math.round(fullDayData.mintemp_f),
+      maxTempF: Math.round(fullDayData.maxtemp_f),
 
       text: fullDayData.condition.text,
       icon: fullDayData.condition.icon,
