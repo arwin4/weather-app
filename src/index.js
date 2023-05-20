@@ -63,6 +63,7 @@ async function renderWeather(location) {
 }
 
 function newLocation() {
+  // FIXME: preserve current unit
   // Repopulate page with custom location information
   const searchForm = document.querySelector('.search-form');
   const locationInput = document.querySelector('.search-bar');
