@@ -166,8 +166,20 @@ body {
   top: 5vh;
   right: 5vh;
 
-  width: 100px;
+  width: 120px;
   line-height: 2;
 
   color: #001d3d;
+
+  border: 3px solid #ffd60a;
+  border-radius: 2px;
+}
+
+.temp-unit:hover {
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.temp-unit:active {
+  font-weight: 700;
 }
