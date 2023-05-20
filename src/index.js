@@ -1,3 +1,5 @@
+/* eslint-disable operator-linebreak */
+// ⬆ To vastly improve readability at renderTemps()
 import './style.css';
 
 import getWeather from './weather';
@@ -23,11 +25,18 @@ function renderTemp(unit) {
     '.day-after-tomorrow .max-temp',
   );
 
-  todayTempElem.textContent = weather.currentWeather[`temp${unit}`];
-  tomorrowMinTempElem.textContent = weather.day1[`minTemp${unit}`];
-  tomorrowMaxTempElem.textContent = weather.day1[`maxTemp${unit}`];
-  dayAfterTomorrowMinTempElem.textContent = weather.day2[`minTemp${unit}`];
-  dayAfterTomorrowMaxTempElem.textContent = weather.day2[`maxTemp${unit}`];
+  const unitDisplay = ` °${unit}`;
+
+  todayTempElem.textContent =
+    weather.currentWeather[`temp${unit}`] + unitDisplay;
+  tomorrowMinTempElem.textContent =
+    weather.day1[`minTemp${unit}`] + unitDisplay;
+  tomorrowMaxTempElem.textContent =
+    weather.day1[`maxTemp${unit}`] + unitDisplay;
+  dayAfterTomorrowMinTempElem.textContent =
+    weather.day2[`minTemp${unit}`] + unitDisplay;
+  dayAfterTomorrowMaxTempElem.textContent =
+    weather.day2[`maxTemp${unit}`] + unitDisplay;
 }
 
 async function renderWeather(location) {
