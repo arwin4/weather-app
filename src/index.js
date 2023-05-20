@@ -3,14 +3,16 @@ import './style.css';
 import getWeather from './weather';
 
 let weather;
+let currentUnit = 'C';
 
 async function saveWeather(location) {
   weather = await getWeather(location);
   console.log(weather);
 }
 
-function renderTemp(unit = 'C') {
+function renderTemp(unit) {
   // Display several temps, in Celcius by default but can also take 'F'
+
   const todayTempElem = document.querySelector('.current .temp');
   const tomorrowMinTempElem = document.querySelector('.tomorrow .min-temp');
   const tomorrowMaxTempElem = document.querySelector('.tomorrow .max-temp');
@@ -59,11 +61,10 @@ async function renderWeather(location) {
   );
   dayAfterTomorrowIcon.src = `https:${weather.day2.icon}`;
 
-  renderTemp(); // Render all temps
+  renderTemp(currentUnit); // Render all temps
 }
 
 function newLocation() {
-  // FIXME: preserve current unit
   // Repopulate page with custom location information
   const searchForm = document.querySelector('.search-form');
   const locationInput = document.querySelector('.search-bar');
@@ -76,7 +77,6 @@ function newLocation() {
 }
 
 function changeUnit() {
-  let currentUnit = 'C';
   const unitBtn = document.querySelector('.temp-unit');
   unitBtn.textContent = 'Change to °F';
 
