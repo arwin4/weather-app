@@ -4,7 +4,7 @@
 }
 
 * {
-  border: 1px solid #ffd60a;
+  /* border: 1px solid #ffd60a; */
   font-family: Manrope, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
     Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   color: azure;
@@ -77,7 +77,7 @@ body {
   height: 30px;
 
   padding-left: 10px;
-  font-size: 1.1rem;
+  font-size: 1rem;
   color: #4b535c;
   caret-color: #7b8898;
 
@@ -103,6 +103,19 @@ body {
     'current tomorrow'
     'current day-after-tomorrow';
   grid-area: weather;
+
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.weather > * {
+  padding: 5px 5px;
+
+  box-shadow: 10px 10px 36px -8px rgba(0, 0, 0, 0.49);
+  border: 4px solid transparent;
+  border-radius: 5px;
+
+  background-color: #1d619f;
 }
 
 .temp {
@@ -111,19 +124,37 @@ body {
 }
 
 .day-name {
-  position: absolute;
+  grid-row: 1;
+
+  color: #4b535c;
+  background-color: #ffd60a;
+  padding: 2px 6px;
+
+  font-size: 0.9rem;
+  text-align: center;
+
+  border-radius: 15px;
+}
+
+.current .day-name {
+  grid-row: 1;
 }
 
 .current {
   display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 2fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: min-content 2fr 1fr 1fr;
   grid-auto-flow: row;
   grid-area: current;
 }
 
+.title {
+  background-color: azure;
+  color: #4b535c;
+}
+
 .icon-and-temp {
-  grid-row: 1;
+  grid-row: 2;
   grid-column: 1 / span 2;
   display: flex;
   align-items: center;
@@ -132,12 +163,12 @@ body {
 }
 
 .description-container {
-  grid-row: 2;
+  grid-row: 3;
   grid-column: span 2;
 }
 
 .today-forecast-container {
-  grid-row: 3;
+  grid-row: 4;
   grid-column: span 2;
 }
 
@@ -145,7 +176,8 @@ body {
 .day-after-tomorrow {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
+  grid-template-rows: min-content repeat(2, 1fr);
+  text-align: center;
 
   grid-auto-flow: row;
 }
@@ -154,7 +186,7 @@ body {
 .day-after-tomorrow-icon {
   place-self: center;
   grid-column: 1 / span 2;
-  grid-row: 1 / span 1;
+  grid-row: 2 / span 1;
 }
 
 .weather img {
@@ -167,6 +199,7 @@ body {
 .tomorrow .max-temp,
 .day-after-tomorrow .min-temp,
 .day-after-tomorrow .max-temp {
+  grid-row: 3;
   place-self: center;
 }
 
