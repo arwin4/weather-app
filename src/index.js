@@ -60,7 +60,7 @@ async function renderWeather(location) {
   // Current weather
   const todayIcon = document.querySelector('.current-weather-icon');
   // TODO: Bigger image? (124x124)
-  todayIcon.src = `https:${weather.currentWeather.icon}`;
+  todayIcon.src = weather.currentWeather.icon;
 
   const todayDescription = document.querySelector('.description');
   todayDescription.textContent = weather.currentWeather.description;
@@ -70,7 +70,7 @@ async function renderWeather(location) {
 
   // Forecast tomorrow
   const tomorrowIcon = document.querySelector('.tomorrow-icon');
-  tomorrowIcon.src = `https:${weather.day1.icon}`;
+  tomorrowIcon.src = weather.day1.icon;
 
   // Forecast day after tomorrow
   const weekday = document.querySelector('.day-after-tomorrow .day-name');
@@ -79,7 +79,7 @@ async function renderWeather(location) {
   const dayAfterTomorrowIcon = document.querySelector(
     '.day-after-tomorrow-icon',
   );
-  dayAfterTomorrowIcon.src = `https:${weather.day2.icon}`;
+  dayAfterTomorrowIcon.src = weather.day2.icon;
 
   renderTemp(currentUnit); // Render all temps
 
