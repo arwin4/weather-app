@@ -39,7 +39,18 @@ function renderTemp(unit) {
     weather.day2[`maxTemp${unit}`] + unitDisplay;
 }
 
+function showSpinner(display) {
+  const spinner = document.querySelector('.spinner');
+  if (display) {
+    spinner.classList.add('show-spinner');
+  } else {
+    spinner.classList.remove('show-spinner');
+  }
+}
+
 async function renderWeather(location) {
+  showSpinner(true);
+
   await saveWeather(location);
 
   // Location name
@@ -71,6 +82,8 @@ async function renderWeather(location) {
   dayAfterTomorrowIcon.src = `https:${weather.day2.icon}`;
 
   renderTemp(currentUnit); // Render all temps
+
+  showSpinner(false);
 }
 
 function newLocation() {
