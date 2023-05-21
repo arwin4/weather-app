@@ -54,7 +54,7 @@ body {
   display: grid;
   grid-template-columns: 1fr minmax(400px, 60vw) 1fr;
   grid-template-rows: 1fr 1fr 1fr;
-  gap: 0px 0px;
+
   grid-auto-flow: row;
   grid-template-areas:
     '. search .'
@@ -97,12 +97,17 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
-  gap: 0px 0px;
+
   grid-auto-flow: row;
   grid-template-areas:
     'current tomorrow'
     'current day-after-tomorrow';
   grid-area: weather;
+}
+
+.temp {
+  width: 50px;
+  text-align: center;
 }
 
 .day-name {
@@ -126,24 +131,6 @@ body {
   justify-content: center;
 }
 
-/* .current .icon {
-  grid-row: 1 / span 1;
-  grid-column: 1 / span 1;
-  display: grid;
-}
-
-.current-weather-icon {
-  align-self: center;
-  justify-self: right;
-  margin-right: 10px; */
-/* } */
-
-/* .temp {
-  align-self: center;
-  justify-self: left;
-  margin-left: 10px;
-} */
-
 .description-container {
   grid-row: 2;
   grid-column: span 2;
@@ -159,7 +146,7 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
-  gap: 0px 0px;
+
   grid-auto-flow: row;
 }
 
