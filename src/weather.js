@@ -1,4 +1,6 @@
 /* eslint-disable no-alert */
+/* eslint-disable operator-linebreak */
+
 import { formatDuration } from 'date-fns';
 import differenceInMinutes from 'date-fns/differenceInMinutes';
 import parse from 'date-fns/parse';
@@ -6,21 +8,6 @@ import getDay from 'date-fns/getDay';
 
 function convertWeatherData(allWeather) {
   // Extract and convert the appropriate data from the API's response
-  function getDaylightDuration() {
-    // Returns the current day's length, formatted as '8 hours and 25 minutes'
-    const { sunrise } = allWeather.forecast.forecastday[0].astro;
-    const { sunset } = allWeather.forecast.forecastday[0].astro;
-
-    // Convert times ('05:48 AM') to Date in order to use differenceInMinutes
-    const sunriseDate = parse(sunrise, 'hh:mm a', new Date());
-    const sunsetDate = parse(sunset, 'hh:mm a', new Date());
-    const daylightMinutes = differenceInMinutes(sunsetDate, sunriseDate);
-
-    // Convert and format
-    const hours = Math.floor(daylightMinutes / 60);
-    const minutes = daylightMinutes % 60;
-    return formatDuration({ hours, minutes }, { delimiter: ' and ' });
-  }
 
   const currentWeather = {
     city: allWeather.location.name,
@@ -33,6 +20,48 @@ function convertWeatherData(allWeather) {
 
     dayForecast: allWeather.forecast.forecastday[0].day.condition.text,
   };
+
+  const sunTimes = {
+    // TODO: regional hour format
+    sunrise: allWeather.forecast.forecastday[0].astro.sunrise,
+    sunset: allWeather.forecast.forecastday[0].astro.sunset,
+    localTime: allWeather.location.localtime,
+  };
+
+  function calculateDaylightData() {
+    const { sunrise } = sunTimes;
+    const { sunset } = sunTimes;
+    const { localTime } = sunTimes;
+
+    // Calculate the total minutes of daylight
+    // Convert times ('05:48 AM') to Date in order to use differenceInMinutes
+    const sunriseDate = parse(sunrise, 'hh:mm a', new Date());
+    const sunsetDate = parse(sunset, 'hh:mm a', new Date());
+    const daylightMinutes = differenceInMinutes(sunsetDate, sunriseDate);
+    sunTimes.daylightDurationMinutes = daylightMinutes;
+
+    // Format the current day's length as '8 hours and 25 minutes'
+    const hours = Math.floor(daylightMinutes / 60);
+    const minutes = daylightMinutes % 60;
+    sunTimes.dayLightDurationText = formatDuration(
+      { hours, minutes },
+      { delimiter: ' and ' },
+    );
+
+    // Calculate daylight progress percentage
+    // (At 50%, the sun is at the halfway point of its journey through the sky.)
+    // TODO: Test edge cases: both pole circles
+    const localTimeDate = parse(localTime, 'yyyy-MM-dd HH:mm', new Date());
+
+    const daylightMinutesPassed = differenceInMinutes(
+      localTimeDate,
+      sunriseDate,
+    );
+
+    const daylightProgressPercentage =
+      (daylightMinutesPassed / daylightMinutes) * 100;
+    sunTimes.daylightProgressPercentage = daylightProgressPercentage;
+  }
 
   function getWeekdayName(dateString) {
     // Get a date's weekday name in English.
@@ -71,16 +100,9 @@ function convertWeatherData(allWeather) {
     return forecast;
   }
 
-  const sunTimes = {
-    // TODO: regional hour format
-    sunrise: allWeather.forecast.forecastday[0].astro.sunrise,
-    sunset: allWeather.forecast.forecastday[0].astro.sunset,
-
-    daylightDuration: getDaylightDuration(),
-  };
-
   const day1 = getDailyForecast(1);
   const day2 = getDailyForecast(2);
+  calculateDaylightData();
 
   return {
     currentWeather,
