@@ -61,6 +61,8 @@ function convertWeatherData(allWeather) {
     const daylightProgressPercentage =
       (daylightMinutesPassed / daylightMinutes) * 100;
     sunTimes.daylightProgressPercentage = daylightProgressPercentage;
+    // TODO: separate behavior at nighttime
+    sunTimes.isDay = true;
   }
 
   function getWeekdayName(dateString) {

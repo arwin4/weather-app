@@ -12,6 +12,27 @@ async function saveWeather(location) {
   console.log(weather);
 }
 
+function renderSunData() {
+  function renderSun() {
+    // Render the sun image on its path
+    const sun = document.querySelector('.sun');
+    const { daylightProgressPercentage } = weather.sunTimes;
+    sun.style['background-position-x'] = `${daylightProgressPercentage}%`;
+  }
+
+  function renderMoon() {}
+  // TODO: Implement night behavior
+
+  function renderText() {}
+
+  if (weather.sunTimes.isDay) {
+    renderSun();
+  } else {
+    renderMoon();
+  }
+  renderText();
+}
+
 function renderTemp(unit) {
   // Display several temps, in Celcius by default but can also take 'F'
 
@@ -82,6 +103,7 @@ async function renderWeather(location) {
   dayAfterTomorrowIcon.src = weather.day2.icon;
 
   renderTemp(currentUnit); // Render all temps
+  renderSunData();
 
   showSpinner(false);
 }
@@ -115,17 +137,6 @@ function changeUnit() {
   });
 }
 
-function renderSunData() {
-  function renderSun() {
-    const sun = document.querySelector('.sun');
-  }
-
-  function renderText() {}
-  renderSun();
-  renderText();
-}
-
-renderWeather('Longyearbyen');
+renderWeather('Arnhem');
 newLocation();
 changeUnit();
-renderSunData();
