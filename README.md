@@ -10,10 +10,15 @@ I made this weather app [as part of The Odin Project's JavaScript course](https:
 - [ ] Displays forecast for current day and the two following days
 - [ ] Displays some astronomical data for the current day: sun times and total hours of daylight
 
+## Flaws
+
+- The astronomical display does not work properly for locations that are experiencing polar days or nights.
+
 ## Technology used
 
 Webpack, HTML, JavaScript, CSS.
-Dependencies: date-fns (awesome library for working with dates).
+
+Dependencies: date-fns (awesome library for working with dates and times).
 
 ## Things I noticed and learned while developing this project
 
