@@ -18,7 +18,7 @@ body {
   position: relative;
   grid-area: sun-wrapper;
   justify-self: center;
-  width: 80vw;
+  width: clamp(50%, 80%, 20%);
 }
 
 .sun-path {
@@ -38,6 +38,26 @@ body {
   background-repeat: no-repeat;
   background-position-y: 50%;
   background-size: 50px;
+}
+
+.sunrise {
+  position: relative;
+  top: -60px;
+  left: -66px;
+  width: fit-content;
+}
+
+.sunset {
+  position: relative;
+  top: -82px;
+  left: 50vw;
+  width: fit-content;
+}
+
+.daylight-duration {
+  position: relative;
+  bottom: 65px;
+  text-align: center;
 }
 
 .spinner {
@@ -76,7 +96,7 @@ body {
 }
 
 .container {
-  height: 100vh;
+  /* height: 100vh; */
   display: grid;
   grid-template-columns: 1fr minmax(400px, 60vw) 1fr;
   grid-template-rows: 1fr 100px 1fr 1fr;
@@ -85,8 +105,8 @@ body {
   grid-template-areas:
     '. search .'
     'sun-wrapper sun-wrapper sun-wrapper'
-    'sunrise weather sunset'
-    'sunrise weather sunset';
+    '. weather .'
+    '. weather .';
 }
 
 .search {
@@ -98,6 +118,7 @@ body {
   justify-content: center;
   row-gap: 20px;
   width: 80%;
+  margin-bottom: -90px;
 }
 
 .search-bar {
@@ -132,6 +153,7 @@ body {
   grid-area: weather;
 
   gap: 10px;
+  margin-top: 10px;
   margin-bottom: 20px;
 }
 
@@ -233,14 +255,6 @@ body {
 
 .day-after-tomorrow {
   grid-area: day-after-tomorrow;
-}
-
-.sunrise {
-  grid-area: sunrise;
-}
-
-.sunset {
-  grid-area: sunset;
 }
 
 .temp-unit {

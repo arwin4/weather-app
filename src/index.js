@@ -1,5 +1,6 @@
 /* eslint-disable operator-linebreak */
 // ⬆ To vastly improve readability at renderTemps()
+import { doc } from 'prettier';
 import './style.css';
 
 import getWeather from './weather';
@@ -23,13 +24,22 @@ function renderSunData() {
   function renderMoon() {}
   // TODO: Implement night behavior
 
-  function renderText() {}
+  function renderText() {
+    const sunriseElem = document.querySelector('.sunrise');
+    const sunsetElem = document.querySelector('.sunset');
+    const daylightDurationElem = document.querySelector('.daylight-duration');
+
+    sunriseElem.textContent = weather.sunTimes.sunrise;
+    sunsetElem.textContent = weather.sunTimes.sunset;
+    daylightDurationElem.textContent = `${weather.sunTimes.daylightDurationText} of daylight today`;
+  }
 
   if (weather.sunTimes.isDay) {
     renderSun();
   } else {
     renderMoon();
   }
+
   renderText();
 }
 
@@ -61,6 +71,7 @@ function renderTemp(unit) {
 }
 
 function showSpinner(display) {
+  // TODO: use document.readyState
   const spinner = document.querySelector('.spinner');
   if (display) {
     spinner.classList.add('show-spinner');

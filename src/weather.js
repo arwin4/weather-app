@@ -43,7 +43,7 @@ function convertWeatherData(allWeather) {
     // Format the current day's length as '8 hours and 25 minutes'
     const hours = Math.floor(daylightMinutes / 60);
     const minutes = daylightMinutes % 60;
-    sunTimes.dayLightDurationText = formatDuration(
+    sunTimes.daylightDurationText = formatDuration(
       { hours, minutes },
       { delimiter: ' and ' },
     );
