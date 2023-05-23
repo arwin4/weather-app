@@ -10,21 +10,35 @@ let currentUnit = 'C';
 
 async function saveWeather(location) {
   weather = await getWeather(location);
-  console.log(weather);
 }
 
-function renderSunData() {
+function renderAstroData() {
+  const sun = document.querySelector('.sun');
+  const { isDay } = weather.sunTimes;
+
+  const sunWrapper = document.querySelector('.sun-wrapper');
+  const moonWrapper = document.querySelector('.moon-wrapper');
+
   function renderSun() {
+    // Display sun wrapper, hide moon wrapper
+    moonWrapper.style.display = 'none';
+    sunWrapper.style.display = 'block';
+
     // Render the sun image on its path
-    const sun = document.querySelector('.sun');
     const { daylightProgressPercentage } = weather.sunTimes;
     sun.style['background-position-x'] = `${daylightProgressPercentage}%`;
   }
 
-  function renderMoon() {}
-  // TODO: Implement night behavior
+  function renderMoon() {
+    // Display moon wrapper, hide sun wrapper
+    sunWrapper.style.display = 'none';
+    moonWrapper.style.display = 'flex';
 
-  function renderText() {
+    const moonText = document.querySelector('.moon-text');
+    moonText.textContent = `The sun has set in ${weather.currentWeather.city}. It will rise again at ${weather.sunTimes.sunrise}.`;
+  }
+
+  function renderAstroText() {
     const sunriseElem = document.querySelector('.sunrise');
     const sunsetElem = document.querySelector('.sunset');
     const daylightDurationElem = document.querySelector('.daylight-duration');
@@ -34,13 +48,13 @@ function renderSunData() {
     daylightDurationElem.textContent = `${weather.sunTimes.daylightDurationText} of daylight today`;
   }
 
-  if (weather.sunTimes.isDay) {
+  if (isDay) {
     renderSun();
   } else {
     renderMoon();
   }
 
-  renderText();
+  renderAstroText();
 }
 
 function renderTemp(unit) {
@@ -114,7 +128,7 @@ async function renderWeather(location) {
   dayAfterTomorrowIcon.src = weather.day2.icon;
 
   renderTemp(currentUnit); // Render all temps
-  renderSunData();
+  renderAstroData();
 
   showSpinner(false);
 }

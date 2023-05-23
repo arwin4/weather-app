@@ -14,11 +14,30 @@ body {
   background-color: #003566;
 }
 
-.sun-wrapper {
+.sun-wrapper,
+.moon-wrapper {
+  display: none;
+  grid-row: 2;
+  grid-column: span 3;
   position: relative;
-  grid-area: sun-wrapper;
   justify-self: center;
   width: clamp(50%, 80%, 20%);
+}
+
+.moon-wrapper {
+  justify-content: center;
+  align-items: center;
+  column-gap: 20px;
+}
+
+.moon {
+  width: 50px;
+  height: 100%;
+
+  background-image: url(./assets/night-with-stars.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 50px;
 }
 
 .sun-path {
@@ -96,7 +115,6 @@ body {
 }
 
 .container {
-  /* height: 100vh; */
   display: grid;
   grid-template-columns: 1fr minmax(400px, 60vw) 1fr;
   grid-template-rows: 1fr 100px 1fr 1fr;
@@ -104,7 +122,7 @@ body {
   grid-auto-flow: row;
   grid-template-areas:
     '. search .'
-    'sun-wrapper sun-wrapper sun-wrapper'
+    '. . .' /* defined by grid item, sun-wrapper or moon-wrapper */
     '. weather .'
     '. weather .';
 }
