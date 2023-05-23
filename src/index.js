@@ -115,6 +115,17 @@ function changeUnit() {
   });
 }
 
+function renderSunData() {
+  function renderSun() {
+    const sun = document.querySelector('.sun');
+  }
+
+  function renderText() {}
+  renderSun();
+  renderText();
+}
+
 renderWeather('Longyearbyen');
 newLocation();
 changeUnit();
+renderSunData();
