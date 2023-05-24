@@ -5,10 +5,10 @@ I made this weather app [as part of The Odin Project's JavaScript course](https:
 ## Features
 
 - [x] Uses [weatherapi.com](https://weatherapi.com/) for worldwide weather information
-- [ ] Custom location lookup (nearest city)
+- [x] Custom location lookup (nearest city)
   - [ ] App requests location
-- [ ] Displays forecast for current day and the two following days
-- [ ] Displays some astronomical data for the current day: sun times and total hours of daylight
+- [x] Displays forecast for current day and the two following days
+- [x] Displays some astronomical data for the current day: sun times and total hours of daylight
 
 ## Flaws
 

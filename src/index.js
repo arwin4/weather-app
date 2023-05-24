@@ -35,7 +35,7 @@ function renderAstroData() {
     moonWrapper.style.display = 'flex';
 
     const moonText = document.querySelector('.moon-text');
-    moonText.textContent = `The sun has set in ${weather.currentWeather.city}. It will rise again at ${weather.sunTimes.sunrise}.`;
+    moonText.textContent = `It's nighttime in ${weather.currentWeather.city}.`;
   }
 
   function renderAstroText() {
