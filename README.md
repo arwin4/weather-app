@@ -22,4 +22,6 @@ Dependencies: date-fns (awesome library for working with dates and times).
 ## Things I noticed and learned while developing this project
 
 - Webpack is becoming a lot less frustrating to set up as I get more familiar with it. I've saved my initial setup for this project as a template repository.
-- Using object literals rather than switch statements is just really sleek. (At getWeekdayName())
+- Using object literals rather than switch statements is just really sleek.
+- Layout troubleshooting is getting a lot easier, although it's still easy to underestimate how much time it takes.
+- This is my first project using async and error handling. Both feel a bit awkward to use right now, but I'm sure future projects will help to solidify the basics.
