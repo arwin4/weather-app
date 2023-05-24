@@ -1,7 +1,6 @@
 /* eslint-disable prefer-template */
 /* eslint-disable operator-linebreak */
 // ⬆ To vastly improve readability at renderTemps()
-import { doc } from 'prettier';
 import './style.css';
 
 import getWeather from './weather';
