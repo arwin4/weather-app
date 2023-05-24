@@ -98,7 +98,6 @@ async function renderWeather(location) {
   showSpinner(true);
 
   await saveWeather(location);
-
   // Location name
   const locationName = document.querySelector('.location-name');
   locationName.textContent = weather.currentWeather.city;

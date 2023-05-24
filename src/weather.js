@@ -118,32 +118,31 @@ function convertWeatherData(allWeather) {
   };
 }
 
-const getWeather = async (query = 'Arnhem') => {
+async function getWeather(query = 'Arnhem') {
   // Get weather/astronomical data for three days (includes current day)
   const url = `https://api.weatherapi.com/v1/forecast.json?key=%20b80d13c73b394cdaa92140628231405&q=${query}&days=3&aqi=no&alerts=no`;
 
-  let weatherDataJSON;
-  try {
-    weatherDataJSON = await fetch(url, { mode: 'cors' });
-  } catch (error) {
-    alert(error);
-  }
+  const weatherDataJSON = await fetch(url, { mode: 'cors' });
 
-  let fullWeatherData;
   try {
-    fullWeatherData = await weatherDataJSON.json();
+    const fullWeatherData = await weatherDataJSON.json();
     if (fullWeatherData.error) {
-      throw new Error(
-        `something went wrong getting data from the API. Server responded with:
-
-${fullWeatherData.error.code}: ${fullWeatherData.error.message}`,
+      // eslint-disable-next-line no-console
+      console.log(
+        `Server responded with: ${fullWeatherData.error.code}: ${fullWeatherData.error.message}`,
       );
+      throw new Error('Error');
+    } else {
+      return convertWeatherData(fullWeatherData);
     }
   } catch (error) {
-    alert(error);
+    alert(
+      'Could not look up the weather for this location. Please make sure to enter a valid name.',
+    );
+    // Reload page
+    window.open(window.document.URL, '_self');
+    return null;
   }
-
-  return convertWeatherData(fullWeatherData);
-};
+}
 
 export default getWeather;
