@@ -1,3 +1,4 @@
+/* eslint-disable prefer-template */
 /* eslint-disable operator-linebreak */
 // ⬆ To vastly improve readability at renderTemps()
 import { doc } from 'prettier';
@@ -75,13 +76,13 @@ function renderTemp(unit) {
   todayTempElem.textContent =
     weather.currentWeather[`temp${unit}`] + unitDisplay;
   tomorrowMinTempElem.textContent =
-    weather.day1[`minTemp${unit}`] + unitDisplay;
+    'min ' + weather.day1[`minTemp${unit}`] + unitDisplay;
   tomorrowMaxTempElem.textContent =
-    weather.day1[`maxTemp${unit}`] + unitDisplay;
+    'max ' + weather.day1[`maxTemp${unit}`] + unitDisplay;
   dayAfterTomorrowMinTempElem.textContent =
-    weather.day2[`minTemp${unit}`] + unitDisplay;
+    'min ' + weather.day2[`minTemp${unit}`] + unitDisplay;
   dayAfterTomorrowMaxTempElem.textContent =
-    weather.day2[`maxTemp${unit}`] + unitDisplay;
+    'max ' + weather.day2[`maxTemp${unit}`] + unitDisplay;
 }
 
 function showSpinner(display) {
