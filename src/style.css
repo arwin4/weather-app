@@ -162,7 +162,7 @@ body {
 
 .weather {
   display: grid;
-  grid-template-columns: 250px 200px;
+  grid-template-columns: 200px 200px;
   grid-template-rows: 1fr 1fr;
 
   grid-auto-flow: row;
@@ -220,8 +220,18 @@ body {
 }
 
 .title {
-  background-color: azure;
+  background-color: #ffed93;
+  border-radius: 5px;
+  width: fit-content;
+  padding: 0 5px;
+
   color: #4b535c;
+  font-size: 0.9rem;
+}
+
+.today-forecast,
+.description {
+  font-size: 0.9rem;
 }
 
 .icon-and-temp {
@@ -241,6 +251,13 @@ body {
 .today-forecast-container {
   grid-row: 4;
   grid-column: span 2;
+}
+
+.description-container,
+.today-forecast-container {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
 }
 
 .tomorrow,
