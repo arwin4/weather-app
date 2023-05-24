@@ -50,7 +50,6 @@ function convertWeatherData(allWeather) {
 
     // Calculate daylight progress percentage
     // (At 50%, the sun is at the halfway point of its journey through the sky.)
-    // TODO: Test edge cases: both pole circles
     const localTimeDate = parse(localTime, 'yyyy-MM-dd HH:mm', new Date());
 
     const daylightMinutesPassed = differenceInMinutes(

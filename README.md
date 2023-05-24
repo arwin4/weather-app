@@ -1,12 +1,11 @@
 # Weather app
 
-I made this weather app [as part of The Odin Project's JavaScript course](https://www.theodinproject.com/lessons/node-path-javascript-weather-app). It expands on the assignment in a number of ways. Most notably, it features forecast information, not just current weather info.
+I made this weather app [as part of The Odin Project's JavaScript course](https://www.theodinproject.com/lessons/node-path-javascript-weather-app). It expands on the assignment by featuring a forecast and by showing some basic astronomical data.
 
 ## Features
 
 - [x] Uses [weatherapi.com](https://weatherapi.com/) for worldwide weather information
 - [x] Custom location lookup (nearest city)
-  - [ ] App requests location
 - [x] Displays forecast for current day and the two following days
 - [x] Displays some astronomical data for the current day: sun times and total hours of daylight
 
